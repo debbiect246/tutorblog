@@ -1,12 +1,13 @@
 from django.shortcuts import render
+from .models import Post
 
-# Create your views here.
-from django.http import HttpResponse
 
 def home(request):
-    return render(request, 'blog/home.html')
-    #this function links to home page in templates folder in blog app.
+    context = {
+        'posts': Post.objects.all()
+    }
+    return render(request, 'blog/home.html', context)
+
 
 def about(request):
-    return render(request, 'blog/about.html')
-    #this function links to blog page in templates folder in blog app.
+    return render(request, 'blog/about.html', {'title': 'About'})
